@@ -1,0 +1,24 @@
+@startuml
+
+class EncodingModule {
+    -File inputFile
+    -File outputFile
+    -URL url
+    +encodeWithFiles() : void
+    +encodeBasedOnNetworkAndDatabase() : void
+}
+
+class EncodingModuleClient {
+    +main(args: String[]) : void
+}
+
+class MyDatabase {
+    -Map<Integer, String> _data
+    -int _count
+    +write(inputString: String) : int
+}
+
+EncodingModule "1" -- "1" MyDatabase
+EncodingModule "1" -- "1" EncodingModuleClient
+
+@enduml

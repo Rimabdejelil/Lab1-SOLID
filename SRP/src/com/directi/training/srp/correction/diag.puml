@@ -1,0 +1,44 @@
+@startuml
+
+class Car {
+  - _id: String
+  - _model: String
+  - _brand: String
+  + Car(id: String, model: String, brand: String)
+  + getId(): String
+  + getModel(): String
+  + getBrand(): String
+}
+
+class CarDao {
+  - _carsDb: List<Car>
+  + findById(carId: String): Car
+  + findAll(): List<Car>
+}
+
+class CarFormatter {
+  + getCarsNames(cars: List<Car>): String
+}
+
+class CarManager {
+  - _carDao: CarDao
+  - _carFormatter: CarFormatter
+  - _carRater: CarRater
+  + CarManager(carDao: CarDao, carFormatter: CarFormatter, carRater: CarRater)
+  + getCarById(carId: String): Car
+  + getCarsNames(): String
+  + getBestCar(): Car
+}
+
+class CarRater {
+  + getBestCar(cars: List<Car>): Car
+}
+
+Car --> CarDao
+Car --> CarFormatter
+CarManager --> CarDao
+CarManager --> CarFormatter
+CarManager --> CarRater
+CarRater --> Car
+
+@enduml

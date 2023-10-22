@@ -1,0 +1,35 @@
+@startuml
+
+interface IDuck {
+  + quack(): void
+  + swim(): void
+}
+
+class Duck {
+  + quack(): void
+  + swim(): void
+}
+
+class ElectronicDuck {
+  - _on: boolean
+  + quack(): void
+  + swim(): void
+  + turnOn(): void
+  + turnOff(): void
+}
+
+class Pool {
+  + run(): void
+  - quack(ducks: IDuck...): void
+  - swim(ducks: IDuck...): void
+}
+
+class IDuckException {
+  + IDuckException(message: String)
+}
+
+Duck <|.. IDuck
+ElectronicDuck <|.. IDuck
+Pool --> IDuck
+
+@enduml

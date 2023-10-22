@@ -1,0 +1,58 @@
+@startuml
+
+interface IReader {
+  + read(): String
+}
+
+interface IWriter {
+  + write(encodedLine: String): void
+}
+
+class EncodingModule {
+  + encode(reader: IReader, writer: IWriter): void
+}
+
+class EncodingModuleClient {
+  + main(args: String[]): void
+}
+
+class MyDatabase {
+  - _data: Map<Integer, String>
+  - _count: int
+  + write(inputString: String): int
+}
+
+class MyDatabaseWriter {
+  + write(input: String): void
+}
+
+class MyFileReader {
+  - _fileName: String
+  + MyFileReader(fileName: String)
+  + read(): String
+}
+
+class MyFileWriter {
+  - _fileName: String
+  + MyFileWriter(fileName: String)
+  + write(encodedLine: String): void
+}
+
+class MyNetworkReader {
+  - _protocol: String
+  - _host: String
+  - _file: String
+  + MyNetworkReader(protocol: String, host: String, file: String)
+  + read(): String
+}
+
+IReader <|.. MyFileReader
+IReader <|.. MyNetworkReader
+IWriter <|.. MyFileWriter
+MyDatabase --|> IWriter
+MyDatabaseWriter --|> IWriter
+EncodingModule ..> IReader
+EncodingModule ..> IWriter
+EncodingModuleClient --> EncodingModule
+
+@enduml
